@@ -1,0 +1,9 @@
+.waldoImg {
+  width: 100%;
+}
+
+.targettingBox {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}
