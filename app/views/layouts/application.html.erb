@@ -21,3 +21,44 @@
     <%= yield %>
   </body>
 </html>
+
+<!--
+how the app should work: 
+  - renders a homepage with the leaderboard and a start button 
+  - clicking the start button should render the image and start the timer 
+  - clicking a section of the image should render the targetting box and allow the player to select a character
+  - selecting a character should check if the user has guessed correctly 
+  - a correct guess should make the box disappear and place a green mark on the position of the character 
+  - a wrong guess should display a message and make the box disappear 
+  - guessing all the characters should display the time elapsed and a form to register the user's name 
+  - submission of the form should bring the user back to the home page
+
+plan:
+  - backend: 
+    - Coordinates model 
+      - it will save, hold, and make the pixel positions of the characters available to the front end 
+    - Timer model 
+      - stores the starting time and the end time
+      - stores the final completion time (end - start)
+  - frontend:
+    - Homepage component 
+      - renders leaderboard by fetching data from the server 
+      - contains start button 
+    - Image component 
+      - renders the image 
+      - starts timer only when image is rendered
+      - renders targetting box component on click 
+      - tracks state of correct answers
+      - if the player has guessed all the answers, render highscore form component 
+    - targeting box component 
+      - displays a box with a list of possible characters next to it 
+      - has a method to check whether or not the selected character is within the coordinates of the box 
+      - renders green marker if user correctly points to the character
+      - renders error message if the user makes a mistake 
+      - gets removed until the user clicks again 
+    - highscore form component 
+      - fetches timer from server and allows user to save a username 
+    - leaderboard component 
+      - displays a list of all the highscores 
+      - allows user to restart the game organically 
+-->
