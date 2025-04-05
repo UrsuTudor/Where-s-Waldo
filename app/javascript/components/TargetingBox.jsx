@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TargetingBox({ mousePosition }) {
+export default function TargetingBox({ position }) {
   function selectCharacter(e) {
     e.preventDefault();
   }
@@ -8,10 +8,9 @@ export default function TargetingBox({ mousePosition }) {
   return (
     <form
       className="targettingBox"
-      action="post"
       style={{
-        left: mousePosition.x + 15,
-        top: mousePosition.y,
+        left: position.x,
+        top: position.y,
       }}
     >
       <button type="submit" onClick={() => selectCharacter(e)}>
