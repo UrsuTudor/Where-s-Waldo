@@ -35,11 +35,10 @@ how the app should work:
 
 plan:
   - backend: 
-    - Coordinates model 
-      - it will save, hold, and make the pixel positions of the characters available to the front end 
     - Timer model 
       - stores the starting time and the end time
       - stores the final completion time (end - start)
+      
   - frontend:
     - Homepage component 
       - renders leaderboard by fetching data from the server 
@@ -48,7 +47,6 @@ plan:
       - tracks state of correct answers
       - if the player has guessed all the answers, render highscore form component 
     - targeting box component 
-      - has a method to check whether or not the selected character is within the coordinates of the box 
       - renders green marker if user correctly points to the character
       - renders error message if the user makes a mistake 
       - gets removed until the user clicks again 
@@ -56,10 +54,4 @@ plan:
       - fetches timer from server and allows user to save a username 
     - leaderboard component 
       - displays a list of all the highscores
-
-  Character coordinates:
-    waldoLocation = {x: 0.404, y: 0.665} * width / height
-    wendaLocation = {x: 0.295, y: 0.560}
-    odlawLocation = {x: 0.071, y: 0.731}
-    wizardLocation = {x: 0.78, y: 0.623}
 -->

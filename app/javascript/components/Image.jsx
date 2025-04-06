@@ -1,7 +1,7 @@
 import "../assets/stylesheets/reset.css";
 import "../assets/stylesheets/image.css";
 import TargetingBox from "./TargetingBox";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useInterval } from "../helpers";
 
 export default function Image() {
@@ -9,24 +9,19 @@ export default function Image() {
   const [mousePosition, setMousePosition] = useState({ x: null, y: null });
   const [elapsedTime, setElapsedTime] = useState(0);
   const boxPosition = useRef()
+  const imageBounds = useRef({})
 
-  function changeBoxDisplay() {
-    setBoxDisplay(!boxDisplay);
-  }
-
-  function changeMousePosition(e) {
-    setMousePosition({x: e.clientX, y: e.clientY})
-  }
-
+  // this method gets the bounds of the image element that will contain the targetting box and calculates the position of
+  // the box based on it, taking into account possible overflows to the right or bottom of the container
   // the magic numbers are merely there for aesthethic reasons and can be edited without issues
   function getBoxPosition(e){
-    const rect = e.target.getBoundingClientRect()
+    imageBounds.current = e.target.getBoundingClientRect()
 
-    let offsetX = e.clientX - rect.left + 15
-    let offsetY = e.clientY - rect.top + 50
+    let offsetX = e.clientX - imageBounds.current.left + 15
+    let offsetY = e.clientY - imageBounds.current.top + 50
 
-    const isNearBottom = offsetY > rect.height - 100
-    const isNearRight = rect.right - offsetX < 175
+    const isNearBottom = offsetY > imageBounds.current.height - 100
+    const isNearRight = imageBounds.current.right - offsetX < 175
 
     if (isNearRight) offsetX -= 200
     if (isNearBottom) offsetY -= 125
@@ -35,9 +30,9 @@ export default function Image() {
   }
 
   function handleClick(e){
-    changeMousePosition(e)
+    setMousePosition({x: e.clientX, y: e.clientY})
     getBoxPosition(e)
-    changeBoxDisplay()
+    setBoxDisplay(!boxDisplay);
   }
 
   useInterval(() => {
@@ -53,7 +48,7 @@ export default function Image() {
         alt=""
         onClick={handleClick}
       />
-      {boxDisplay && <TargetingBox position={boxPosition.current} />}
+      {boxDisplay && <TargetingBox imageBounds={imageBounds.current} position={boxPosition.current} />}
     </div>
   );
 }

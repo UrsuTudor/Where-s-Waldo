@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   root "homepage#index"
 
+  namespace :api do
+    namespace :v1 do
+      get "/show/:id", to: "coordinates#show"
+      post "coordinates/create"
+    end
+  end
+
   get "/*path" => "homepage#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
