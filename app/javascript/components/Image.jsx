@@ -47,7 +47,9 @@ export default function Image() {
         <TargetingBox
           imageBounds={imageBounds.current}
           position={boxPosition.current}
+          foundCharacters={foundCharacters}
           setFoundCharacters={setFoundCharacters}
+          onSubmit={() => {setBoxDisplay(!boxDisplay)}}
         />
       )}
       {foundCharacters.map((character, i) => {

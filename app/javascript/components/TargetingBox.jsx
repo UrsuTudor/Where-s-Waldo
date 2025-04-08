@@ -3,7 +3,9 @@ import React from "react";
 export default function TargetingBox({
   imageBounds,
   position,
+  foundCharacters,
   setFoundCharacters,
+  onSubmit,
 }) {
   async function getCharacterCoords(e, id) {
     try {
@@ -19,38 +21,35 @@ export default function TargetingBox({
   }
 
   // todo: find a better way to normalize the criteria used when deciding whether or not the user has clicked on the right spot
-  function checkSelection(characterCoords) {
+  function selectionProximity(characterCoords) {
     const normalizedXCriteria = (imageBounds.width / 100) * 1.5;
     const normalizedYCriteria = (imageBounds.height / 100) * 1.5;
 
-    const closeOnRightBound =
-      position.x - characterCoords.x * imageBounds.width < normalizedXCriteria;
-    const closeOnLeftBound =
-      characterCoords.x * imageBounds.width - position.x < normalizedXCriteria;
-    const closeOnBottomBound =
-      position.y - characterCoords.y * imageBounds.height < normalizedYCriteria;
-    const closeOnTopBound =
-      characterCoords.y * imageBounds.height - position.y < normalizedYCriteria;
+    const closeOnRightBound = position.x - characterCoords.x * imageBounds.width < normalizedXCriteria;
+    const closeOnLeftBound = characterCoords.x * imageBounds.width - position.x < normalizedXCriteria;
+    const closeOnBottomBound = position.y - characterCoords.y * imageBounds.height < normalizedYCriteria;
+    const closeOnTopBound = characterCoords.y * imageBounds.height - position.y < normalizedYCriteria;
 
-    if (
-      closeOnRightBound &&
-      closeOnLeftBound &&
+    return (
       closeOnBottomBound &&
+      closeOnLeftBound &&
+      closeOnRightBound &&
       closeOnTopBound
-    ) {
-      setFoundCharacters((prevFoundCharacter) => {
-        if (
-          prevFoundCharacter.some(
-            (char) => char.character === characterCoords.character
-          )
-        ) {
-          alert("You have already found that character!");
-          return prevFoundCharacter;
-        } else {
-          return [...prevFoundCharacter, characterCoords];
-        }
-      });
+    );
+  }
+
+  function checkSelection(characterCoords) {
+    if ( foundCharacters.some( (char) => char.character === characterCoords.character )) {
+      alert(`You have already found ${characterCoords.character}!`);
+      return;
     }
+
+    if (selectionProximity(characterCoords)) {
+      setFoundCharacters((prevFoundCharacter) => [...prevFoundCharacter, characterCoords])
+      return 
+    }
+
+    alert(`Look more closely, ${characterCoords.character} isn't there!`);
   }
 
   async function handleSelection(e, id) {
@@ -58,6 +57,9 @@ export default function TargetingBox({
 
     const characterCoords = await getCharacterCoords(e, id);
     checkSelection(characterCoords);
+
+    // this merely hides the box after submit
+    onSubmit();
   }
 
   return (
