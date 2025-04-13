@@ -9,7 +9,12 @@ export default function TargetingBox({
 }) {
   async function getCharacterCoords(e, id) {
     try {
-      const url = `/api/v1/show/${id}`;
+      const params = new URLSearchParams()
+      params.append('id', id)
+      params.append('imageBounds', JSON.stringify(imageBounds))
+      params.append('position', JSON.stringify(position))
+      const url = `/api/v1/checkAnswer?${params}`;
+
       const res = await fetch(url);
       if (!res.ok) throw new Error("Network response failed.");
 
@@ -20,43 +25,32 @@ export default function TargetingBox({
     }
   }
 
-  // todo: find a better way to normalize the criteria used when deciding whether or not the user has clicked on the right spot
-  function selectionProximity(characterCoords) {
-    const normalizedXCriteria = (imageBounds.width / 100) * 1.5;
-    const normalizedYCriteria = (imageBounds.height / 100) * 1.5;
-
-    const closeOnRightBound = position.x - characterCoords.x * imageBounds.width < normalizedXCriteria;
-    const closeOnLeftBound = characterCoords.x * imageBounds.width - position.x < normalizedXCriteria;
-    const closeOnBottomBound = position.y - characterCoords.y * imageBounds.height < normalizedYCriteria;
-    const closeOnTopBound = characterCoords.y * imageBounds.height - position.y < normalizedYCriteria;
-
-    return (
-      closeOnBottomBound &&
-      closeOnLeftBound &&
-      closeOnRightBound &&
-      closeOnTopBound
-    );
-  }
-
-  function checkSelection(characterCoords) {
-    if ( foundCharacters.some( (char) => char.character === characterCoords.character )) {
-      alert(`You have already found ${characterCoords.character}!`);
+  function checkSelection(coordData) {
+    if (
+      foundCharacters.some(
+        (char) => char.character === coordData.character.character
+      )
+    ) {
+      alert(`You have already found ${coordData.character.character}!`);
       return;
     }
 
-    if (selectionProximity(characterCoords)) {
-      setFoundCharacters((prevFoundCharacter) => [...prevFoundCharacter, characterCoords])
-      return 
+    if (coordData.is_valid_answer) {
+      setFoundCharacters((prevFoundCharacter) => [
+        ...prevFoundCharacter,
+        coordData.character,
+      ]);
+      return;
     }
 
-    alert(`Look more closely, ${characterCoords.character} isn't there!`);
+    alert(`Look more closely, ${coordData.character.character} isn't there!`);
   }
 
   async function handleSelection(e, id) {
     e.preventDefault();
 
-    const characterCoords = await getCharacterCoords(e, id);
-    checkSelection(characterCoords);
+    const coordData = await getCharacterCoords(e, id)
+    checkSelection(coordData);
 
     // this merely hides the box after submit
     onSubmit();
