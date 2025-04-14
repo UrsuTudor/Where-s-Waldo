@@ -22,7 +22,12 @@ class Api::V1::CoordinatesController < ApplicationController
       session[:found_characters] << params[:id] unless session[:found_characters].include?(params[:id])
     end
 
-    render json: { is_valid_answer: is_valid_answer, character: @character }
+    game_won = checkWin()
+    if game_won
+      session[:found_characters] = []
+    end
+
+    render json: { is_valid_answer: is_valid_answer, character: @character, game_won: game_won }
   end
 
   private
@@ -33,5 +38,13 @@ class Api::V1::CoordinatesController < ApplicationController
 
   def getCharacter(id)
     @coordinate = Coordinate.find(id)
+  end
+
+  def checkWin
+    if session[:found_characters].length === 4
+      true
+    else
+      false
+    end
   end
 end

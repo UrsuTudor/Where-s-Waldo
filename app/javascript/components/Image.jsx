@@ -2,7 +2,7 @@ import "../assets/stylesheets/reset.css";
 import "../assets/stylesheets/image.css";
 import TargetingBox from "./TargetingBox";
 import React, { useEffect, useRef, useState } from "react";
-import { useInterval } from "../helpers";
+import { useInterval, startTime } from "../helpers";
 import GreenMark from "./GreenMark";
 
 export default function Image() {
@@ -13,23 +13,6 @@ export default function Image() {
   const imageBounds = useRef({});
 
   useEffect(() => {
-    async function startTime() {
-      try {
-        const csrfToken = document.querySelector(
-          "meta[name='csrf-token']"
-        ).content;
-        const res = await fetch("/api/v1/time/start_time", {
-          method: "POST",
-          headers: {
-            "X-CSRF-Token": csrfToken,
-          },
-        });
-        if (!res.ok) throw new Error("Network response failed.");
-      } catch (error) {
-        throw new Error(`The timer could not be started: ${error.message}`);
-      }
-    }
-   
     startTime()
   }, []);
 

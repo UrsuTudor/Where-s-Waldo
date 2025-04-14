@@ -1,4 +1,5 @@
 import React from "react";
+import { stopTime } from "../helpers";
 
 export default function TargetingBox({
   imageBounds,
@@ -32,24 +33,24 @@ export default function TargetingBox({
   }
 
   function checkSelection(coordData) {
-    if (
-      foundCharacters.some(
-        (char) => char.character === coordData.character.character
-      )
-    ) {
-      alert(`You have already found ${coordData.character.character}!`);
-      return;
-    }
-
     if (coordData.is_valid_answer) {
       setFoundCharacters((prevFoundCharacter) => [
         ...prevFoundCharacter,
         coordData.character,
       ]);
-      return;
+    } else {
+      alert(`Look more closely, ${coordData.character.character} isn't there!`);
+      return
     }
 
-    alert(`Look more closely, ${coordData.character.character} isn't there!`);
+    if (coordData.game_won){
+      stopTime()
+      alert('Congratulations, you have found them all!')
+    }
+  }
+
+  function alreadyFound(character) {
+    return foundCharacters.some((char) => char.character === character)
   }
 
   async function handleSelection(e, id) {
@@ -70,16 +71,16 @@ export default function TargetingBox({
         top: position.y,
       }}
     >
-      <button type="submit" onClick={(e) => handleSelection(e, 1)}>
+      <button type="submit" onClick={(e) => handleSelection(e, 1)} disabled={alreadyFound('Waldo') }>
         Waldo
       </button>
-      <button type="submit" onClick={(e) => handleSelection(e, 2)}>
+      <button type="submit" onClick={(e) => handleSelection(e, 2)} disabled={alreadyFound('Wenda')}>
         Wenda
       </button>
-      <button type="submit" onClick={(e) => handleSelection(e, 3)}>
+      <button type="submit" onClick={(e) => handleSelection(e, 3)} disabled={alreadyFound('Odlaw')}>
         Odlaw
       </button>
-      <button type="submit" onClick={(e) => handleSelection(e, 4)}>
+      <button type="submit" onClick={(e) => handleSelection(e, 4)} disabled={alreadyFound('Wizard')}>
         Wizard Whitebeard
       </button>
     </form>

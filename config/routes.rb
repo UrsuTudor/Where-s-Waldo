@@ -6,8 +6,7 @@ Rails.application.routes.draw do
       post "coordinates/checkAnswer", to: "coordinates#checkAnswer"
       post "coordinates/create"
       post "/time/start_time", to: "time_trackers#start_time"
-      post "time/end_time", to: "timetrackers#end_time"
-      get "time/get_time", to: "timetrackers#get_time"
+      post "time/stop_time", to: "time_trackers#end_time"
     end
   end
 
