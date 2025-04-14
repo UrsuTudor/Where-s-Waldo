@@ -1,5 +1,4 @@
 import React from "react"
-import { Link, Outlet } from "react-router-dom"
 import Leaderboard from "./Leaderboard"
 import Image from "./Image"
 import { useState } from "react"
@@ -20,8 +19,5 @@ export default function Home(){
         <Leaderboard/>
       </div>
       : <Image />
-      
-
-    
   )
 }

@@ -10,7 +10,7 @@ export default function TargetingBox({
   async function getCharacterCoords(e, id) {
     try {
       const csrfToken = document.querySelector("meta[name='csrf-token']").content;
-      const res = await fetch(`/api/v1/checkAnswer?`, { 
+      const res = await fetch(`/api/v1/coordinates/checkAnswer`, { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

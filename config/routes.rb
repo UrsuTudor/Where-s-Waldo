@@ -3,8 +3,11 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      post "/checkAnswer", to: "coordinates#checkAnswer"
+      post "coordinates/checkAnswer", to: "coordinates#checkAnswer"
       post "coordinates/create"
+      post "/time/start_time", to: "time_trackers#start_time"
+      post "time/end_time", to: "timetrackers#end_time"
+      get "time/get_time", to: "timetrackers#get_time"
     end
   end
 

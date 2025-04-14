@@ -12,6 +12,27 @@ export default function Image() {
   const boxPosition = useRef();
   const imageBounds = useRef({});
 
+  useEffect(() => {
+    async function startTime() {
+      try {
+        const csrfToken = document.querySelector(
+          "meta[name='csrf-token']"
+        ).content;
+        const res = await fetch("/api/v1/time/start_time", {
+          method: "POST",
+          headers: {
+            "X-CSRF-Token": csrfToken,
+          },
+        });
+        if (!res.ok) throw new Error("Network response failed.");
+      } catch (error) {
+        throw new Error(`The timer could not be started: ${error.message}`);
+      }
+    }
+   
+    startTime()
+  }, []);
+
   // this method gets the bounds of the image element that will contain the targetting box and calculates the position of
   // the box based on it, taking into account possible overflows to the right or bottom of the container
   // the magic numbers are merely there for aesthethic reasons and can be edited without issues
@@ -49,11 +70,19 @@ export default function Image() {
           position={boxPosition.current}
           foundCharacters={foundCharacters}
           setFoundCharacters={setFoundCharacters}
-          onSubmit={() => {setBoxDisplay(!boxDisplay)}}
+          onSubmit={() => {
+            setBoxDisplay(!boxDisplay);
+          }}
         />
       )}
       {foundCharacters.map((character, i) => {
-        return <GreenMark key={i} x={character.x * imageBounds.current.width} y={character.y * imageBounds.current.height} />;
+        return (
+          <GreenMark
+            key={i}
+            x={character.x * imageBounds.current.width}
+            y={character.y * imageBounds.current.height}
+          />
+        );
       })}
 
       <a href="https://www.flaticon.com/free-icons/yes" title="yes icons">
