@@ -9,13 +9,19 @@ export default function TargetingBox({
 }) {
   async function getCharacterCoords(e, id) {
     try {
-      const params = new URLSearchParams()
-      params.append('id', id)
-      params.append('imageBounds', JSON.stringify(imageBounds))
-      params.append('position', JSON.stringify(position))
-      const url = `/api/v1/checkAnswer?${params}`;
-
-      const res = await fetch(url);
+      const csrfToken = document.querySelector("meta[name='csrf-token']").content;
+      const res = await fetch(`/api/v1/checkAnswer?`, { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrfToken,
+        },
+        body: JSON.stringify({
+          id,
+          imageBounds,
+          position
+        })
+      });
       if (!res.ok) throw new Error("Network response failed.");
 
       const data = await res.json();

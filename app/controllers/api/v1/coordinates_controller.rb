@@ -11,8 +11,8 @@ class Api::V1::CoordinatesController < ApplicationController
 
   #  todo: find a better way to normalize the criteria used when deciding whether or not the user has clicked on the right spot
   def checkAnswer
-    imageBounds = JSON.parse(params[:imageBounds])
-    position = JSON.parse(params[:position])
+    imageBounds = params[:imageBounds]
+    position = params[:position]
 
     @character = getCharacter(params[:id])
     is_valid_answer = @character.check_selection_proximity(imageBounds, position)

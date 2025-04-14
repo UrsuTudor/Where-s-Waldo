@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      get "/checkAnswer", to: "coordinates#checkAnswer"
+      post "/checkAnswer", to: "coordinates#checkAnswer"
       post "coordinates/create"
     end
   end
