@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_08_190738) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_16_192622) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_08_190738) do
     t.float "y", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "leaderboard_posts", force: :cascade do |t|
+    t.string "user"
+    t.integer "completion_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user"], name: "index_leaderboard_posts_on_user"
   end
 
   create_table "timers", force: :cascade do |t|

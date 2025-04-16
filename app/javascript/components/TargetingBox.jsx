@@ -28,7 +28,7 @@ export default function TargetingBox({
       const data = await res.json();
       return data;
     } catch (error) {
-      throw new Error("Unable to retrieve character coordiantes:", error);
+      throw new Error(`Unable to retrieve character coordiantes: ${error.message}` );
     }
   }
 

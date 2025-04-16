@@ -4,6 +4,7 @@ import TargetingBox from "./TargetingBox";
 import React, { useEffect, useRef, useState } from "react";
 import { useInterval, startTime } from "../helpers";
 import GreenMark from "./GreenMark";
+import ScoreForm from "./ScoreForm";
 
 export default function Image() {
   const [boxDisplay, setBoxDisplay] = useState(false);
@@ -13,7 +14,7 @@ export default function Image() {
   const imageBounds = useRef({});
 
   useEffect(() => {
-    startTime()
+    startTime();
   }, []);
 
   // this method gets the bounds of the image element that will contain the targetting box and calculates the position of
@@ -39,9 +40,10 @@ export default function Image() {
     setBoxDisplay(!boxDisplay);
   }
 
-  useInterval(() => {
-    setElapsedTime(elapsedTime + 1);
-  }, 1000);
+  useInterval(
+    () => { setElapsedTime((prevTime) => prevTime + 1)},
+    foundCharacters.length < 4 ? 1000 : null
+  );
 
   return (
     <div className="gameArea">
@@ -68,6 +70,7 @@ export default function Image() {
         );
       })}
 
+      {foundCharacters.length === 4 && <ScoreForm time={elapsedTime} />}
       <a href="https://www.flaticon.com/free-icons/yes" title="yes icons">
         Tick icon created by juicy_fish - Flaticon
       </a>

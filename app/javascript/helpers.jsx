@@ -8,6 +8,8 @@ function useInterval(callback, delay){
   })
 
   useEffect(()=> {
+    if (delay === null) return
+    
     function tick(){
       savedCallback.current()
     }
@@ -15,7 +17,7 @@ function useInterval(callback, delay){
     let id = setInterval(tick, delay)
 
     return () => clearInterval(id)
-  }, [])
+  }, [delay])
 }
 
 async function startTime() {

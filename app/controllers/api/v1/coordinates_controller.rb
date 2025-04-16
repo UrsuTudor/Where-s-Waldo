@@ -33,7 +33,7 @@ class Api::V1::CoordinatesController < ApplicationController
   private
 
   def coordinate_params
-    params.permit(:id, :imageBounds, :position)
+    params.require(:coordinate).permit(:id, :imageBounds, :position)
   end
 
   def getCharacter(id)

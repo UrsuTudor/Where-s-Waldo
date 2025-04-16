@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       post "coordinates/create"
       post "/time/start_time", to: "time_trackers#start_time"
       post "time/stop_time", to: "time_trackers#end_time"
+      post "leaderboard/add_score", to: "leaderboard_posts#create"
+      get "leaderboard/scores", to: "leaderboard_posts#index"
     end
   end
 
