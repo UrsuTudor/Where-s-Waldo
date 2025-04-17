@@ -15,7 +15,6 @@ export default function ScoreForm({time}) {
         },
         body: JSON.stringify({ "leaderboard_post": {
           "user": name,
-          "completion_time": time
         }
         })
       })

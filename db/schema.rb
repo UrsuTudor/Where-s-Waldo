@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_16_192622) do
 
   create_table "leaderboard_posts", force: :cascade do |t|
     t.string "user"
-    t.integer "completion_time"
+    t.string "completion_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user"], name: "index_leaderboard_posts_on_user"

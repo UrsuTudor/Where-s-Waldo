@@ -70,7 +70,8 @@ export default function Image() {
         );
       })}
 
-      {foundCharacters.length === 4 && <ScoreForm time={elapsedTime} />}
+      {foundCharacters.length === 4
+      && <ScoreForm time={elapsedTime} />}
       <a href="https://www.flaticon.com/free-icons/yes" title="yes icons">
         Tick icon created by juicy_fish - Flaticon
       </a>
