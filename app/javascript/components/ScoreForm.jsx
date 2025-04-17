@@ -3,8 +3,15 @@ import { useState } from "react";
 
 export default function ScoreForm({time}) {
   const [name, setName] = useState('')
+  const [nameIsFocused, setNameIsFocused] = useState(false)
 
-  async function postToLeaderboard(){
+  async function postToLeaderboard(e){
+    if(name.length < 3 || name.length > 18) {
+      e.preventDefault()
+      alert('Your name does not meet the specified requirements.')
+      return
+    }
+
     try {
       const csrfToken = document.querySelector("meta[name='csrf-token']").content;
       const res = await fetch('/api/v1/leaderboard/add_score', {
@@ -28,7 +35,7 @@ export default function ScoreForm({time}) {
   }
 
   return (
-    <form onSubmit={postToLeaderboard}>
+    <form onSubmit={(e) => postToLeaderboard(e)}>
       Your time: {time}
       <label>
         Name:
@@ -36,7 +43,15 @@ export default function ScoreForm({time}) {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          onFocus={() => setNameIsFocused(!nameIsFocused)}
+          onBlur={() => setNameIsFocused(!nameIsFocused)}
         />
+        {nameIsFocused ? (
+          <>
+            {name.length < 3 && <p>Your name needs to have a length of at least 3 characters.</p>}
+            {name.length > 18 && <p>Your name cannot have a length bigger than 18 characters.</p>}
+          </>
+        ) : null}
       </label>
       <button type="submit">Post score</button>
     </form>
