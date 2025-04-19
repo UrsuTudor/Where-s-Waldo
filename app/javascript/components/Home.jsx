@@ -5,8 +5,12 @@ import { useState } from "react"
 
 export default function Home(){
   const [onHomePage, setOnHomePage] = useState(true)
+  const [gameId, setGameId] = useState(0)
 
   function changeOnHomePage(){
+    if(onHomePage){
+      setGameId(prev => prev + 1)
+    }
     setOnHomePage(!onHomePage)
   }
 
@@ -18,6 +22,6 @@ export default function Home(){
         <button onClick={changeOnHomePage}>Play</button>
         <Leaderboard/>
       </div>
-      : <Image changeOnHomePage={changeOnHomePage}/>
+      : <Image key={gameId} changeOnHomePage={changeOnHomePage}/>
   )
 }
