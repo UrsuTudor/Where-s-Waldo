@@ -6,7 +6,7 @@ import { useInterval, startTime } from "../helpers";
 import GreenMark from "./GreenMark";
 import ScoreForm from "./ScoreForm";
 
-export default function Image() {
+export default function Image({changeOnHomePage}) {
   const [boxDisplay, setBoxDisplay] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [foundCharacters, setFoundCharacters] = useState([]);
@@ -71,7 +71,7 @@ export default function Image() {
       })}
 
       {foundCharacters.length === 4
-      && <ScoreForm time={elapsedTime} />}
+      && <ScoreForm time={elapsedTime} changeOnHomePage={changeOnHomePage}/>}
       <a href="https://www.flaticon.com/free-icons/yes" title="yes icons">
         Tick icon created by juicy_fish - Flaticon
       </a>

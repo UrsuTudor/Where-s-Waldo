@@ -1,13 +1,14 @@
 import React from "react";
 import { useState } from "react";
 
-export default function ScoreForm({time}) {
+export default function ScoreForm({time, changeOnHomePage}) {
   const [name, setName] = useState('')
   const [nameIsFocused, setNameIsFocused] = useState(false)
 
   async function postToLeaderboard(e){
+    e.preventDefault()
+
     if(name.length < 3 || name.length > 18) {
-      e.preventDefault()
       alert('Your name does not meet the specified requirements.')
       return
     }
@@ -28,6 +29,7 @@ export default function ScoreForm({time}) {
       if (!res.ok) throw new Error("Network response failed.");
 
       const data = await res.json();
+      changeOnHomePage()
       alert(data.message)
     } catch (error) {
       throw new Error(`We were unable to post your score to the leaderboard: ${error.message}`)

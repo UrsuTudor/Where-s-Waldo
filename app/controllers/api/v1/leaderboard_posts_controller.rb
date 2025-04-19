@@ -1,6 +1,6 @@
 class Api::V1::LeaderboardPostsController < ApplicationController
-  def index
-    scores = LeaderboardPost.all
+  def top_ten
+    scores = LeaderboardPost.order(:completion_time).limit(10)
     render json: scores
   end
 
@@ -19,10 +19,11 @@ class Api::V1::LeaderboardPostsController < ApplicationController
     start_minutes, start_seconds = session[:start_time].split(":").map(&:to_i)
     end_minutes, end_seconds     = session[:end_time].split(":").map(&:to_i)
 
-    completion_time_minutes = ((end_minutes - start_minutes + 60) % 60).to_s.rjust(2, "0")
-    completion_time_seconds = ((end_seconds - start_seconds + 60) % 60).to_s.rjust(2, "0")
+    completion_minutes = (end_minutes - start_minutes + 60) % 60
+    completion_seconds = (end_seconds - start_seconds + 60) % 60
 
-    "#{completion_time_minutes}:#{completion_time_seconds}"
+    # returning the time in seconds for easier sorting in the leaderboard
+    completion_minutes * 60 + completion_seconds
   end
 
   private
