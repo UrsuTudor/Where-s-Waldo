@@ -1,0 +1,30 @@
+table {
+  border: 1px solid black;
+  width: 30vw;
+  height: 70vh;
+  table-layout: fixed;
+}
+
+tbody {
+  display: block;
+  height: 100%
+}
+
+tr {
+  display: flex;
+  height: 10%;
+  align-items: center;
+  justify-content: center;
+}
+
+th {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+}
+
+td {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+}

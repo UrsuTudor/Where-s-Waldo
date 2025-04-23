@@ -2,6 +2,7 @@ import React from "react"
 import Leaderboard from "./Leaderboard"
 import Image from "./Image"
 import { useState } from "react"
+import '../assets/stylesheets/home.css'
 
 export default function Home(){
   const [onHomePage, setOnHomePage] = useState(true)
@@ -17,8 +18,9 @@ export default function Home(){
   return (
     
       onHomePage ?
-      <div>
-        <h1>This be home for now</h1>
+      <div className="homeContainer">
+        <h1 className="title">Where is Waldo?</h1>
+        <h2 className="subtitle">Try to find Waldo, his friends and...his enemies(?) </h2>
         <button onClick={changeOnHomePage}>Play</button>
         <Leaderboard/>
       </div>
