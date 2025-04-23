@@ -29,23 +29,26 @@ export default function Leaderboard(){
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Completion time</th>
-        </tr>
-      </thead>
-      <tbody>
-        {scores.map((score) => {
-          return (
-            <tr key={score.id}>
-              <th scope="row">{score.user}</th>
-              <td>{format_time(score.completion_time)}</td>
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
+    <div className="table_container ">
+      <img className="backgroundImg" src="starry_sky.jpg" alt="" />
+      <table>
+        <thead>
+          <tr>
+            <th className='colHeader' scope="col">Name</th>
+            <th className="colHeader" scope="col">Completion time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {scores.map((score) => {
+            return (
+              <tr key={score.id}>
+                <th scope="row">{score.user}</th>
+                <td>{format_time(score.completion_time)}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
   )
 }

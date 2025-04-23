@@ -21,38 +21,3 @@
     <%= yield %>
   </body>
 </html>
-
-<!--
-how the app should work: 
-  - renders a homepage with the leaderboard and a start button 
-  - clicking the start button should render the image and start the timer 
-  - clicking a section of the image should render the targetting box and allow the player to select a character
-  - selecting a character should check if the user has guessed correctly 
-  - a correct guess should make the box disappear and place a green mark on the position of the character 
-  - a wrong guess should display a message and make the box disappear 
-  - guessing all the characters should display the time elapsed and a form to register the user's name 
-  - submission of the form should bring the user back to the home page
-
-plan:
-  - backend: 
-    - Timer model 
-      - stores the starting time and the end time
-    - Leaderboard model
-      - stores the elapsed time 
-      - stores a username 
-      
-  - frontend:
-    - Homepage component 
-      - renders leaderboard by fetching data from the server 
-      - contains start button 
-    - Image component 
-      - tracks state of correct answers
-      - if the player has guessed all the answers, render highscore form component 
-    - targeting box component 
-      - renders error message if the user makes a mistake 
-      - gets removed until the user clicks again 
-    - highscore form component 
-      - fetches timer from server and allows user to save a username 
-    - leaderboard component 
-      - displays a list of all the highscores
--->

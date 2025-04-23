@@ -37,25 +37,29 @@ export default function ScoreForm({time, changeOnHomePage}) {
   }
 
   return (
-    <form onSubmit={(e) => postToLeaderboard(e)}>
-      Your time: {time}
+    <form className="leaderboardForm" onSubmit={(e) => postToLeaderboard(e)}>
+      <img className="backgroundImg" src="starry_sky.jpg" alt="" />
       <label>
-        Name:
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          onFocus={() => setNameIsFocused(!nameIsFocused)}
-          onBlur={() => setNameIsFocused(!nameIsFocused)}
-        />
+        <h1 className="finalTime"> Your time: {time} </h1>
+        <div className="inputContainer">
+          <span>Name:  </span> 
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onFocus={() => setNameIsFocused(!nameIsFocused)}
+            onBlur={() => setNameIsFocused(!nameIsFocused)}
+          />
+        </div>
+        
         {nameIsFocused ? (
           <>
-            {name.length < 3 && <p>Your name needs to have a length of at least 3 characters.</p>}
-            {name.length > 18 && <p>Your name cannot have a length bigger than 18 characters.</p>}
+            {name.length < 3 && <p className="validationMsg">Your name needs to have a length of at least 3 characters.</p>}
+            {name.length > 18 && <p className="validationMsg">Your name cannot have a length bigger than 18 characters.</p>}
           </>
         ) : null}
       </label>
-      <button type="submit">Post score</button>
+      <button className="boardSubmit" type="submit">Post score</button>
     </form>
   );
 }

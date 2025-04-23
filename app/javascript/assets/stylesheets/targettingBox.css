@@ -1,0 +1,48 @@
+.targettingBox {
+  border-radius: 10px;
+  overflow: hidden;
+  height: fit-content;
+}
+
+button {
+  font-size: 1.2rem;
+  border: 0px solid black;
+  height: 25%;
+}
+
+.red {
+  background-color: red;
+  color: white;
+}
+
+.red:not(:disabled):hover {
+  background-color: rgb(156, 0, 0);
+}
+
+.red:not(:disabled):active {
+  background-color: rgb(117, 0, 0);
+  font-size: 1.1rem;
+}
+
+.red:disabled {
+  background-color: rgb(117, 0, 0);
+  color: rgb(214, 140, 140);
+}
+
+.white {
+  background-color: white;
+}
+
+.white:not(:disabled):hover {
+  background-color: rgb(163, 163, 163);
+}
+
+.white:not(:disabled):active {
+  background-color: rgb(110, 110, 110);
+  font-size: 1.1rem;
+}
+
+.white:disabled {
+  background-color: rgb(163, 163, 163);
+  color:  rgb(70, 70, 70);
+}

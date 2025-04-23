@@ -1,20 +1,67 @@
 .homeContainer {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2vh;
+  background: linear-gradient(
+    to bottom,
+    red 0%,
+    red 10%,
+    white 10%,
+    white 20%,
+    red 20%,
+    red 30%,
+    white 30%,
+    white 40%,
+    red 40%,
+    red 50%,
+    white 50%,
+    white 60%,
+    red 60%,
+    red 70%,
+    rgb(0, 140, 255) 70%,
+    rgb(0, 140, 255) 100%
+  );
 }
 
 .title {
-  width: 20vw;
   text-align: center;
+  color: white;
 }
 
 .subtitle {
-  width: fit-content;
+  width: 100vw;
   text-align: center;
+  background-color: red;
+  color: white;
 }
 
-button {
+/* specified so the table doesn't move when the button shrinks on :active */
+.btnContainer {
+  display: flex;
+  width: 100vw;
+  height: 5vh;
+  justify-content: center;
+}
 
+.startBtn {
+  background-color: red;
+  color: white;
+  border: rgb(88, 0, 0) 1px solid;
+  border-radius: 10px;
+  width: fit-content;
+  height: 4vh;
+  font-size: 1.4rem;
+  box-shadow: 5px 4px 7px rgb(88, 0, 0);
+}
+
+.startBtn:hover {
+  background-color: rgb(156, 0, 0);
+}
+
+.startBtn:active {
+  background-color: rgb(117, 0, 0);
+  font-size: 1.3rem;
+  height: 3.9vh;
 }

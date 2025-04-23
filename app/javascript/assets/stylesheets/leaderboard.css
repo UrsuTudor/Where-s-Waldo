@@ -1,13 +1,24 @@
-table {
-  border: 1px solid black;
+.table_container {
   width: 30vw;
   height: 70vh;
+  position: relative;
+  color: white;
+  box-shadow: 10px 10px 20px black;
+  border-radius: 21px;
+}
+
+table {
+  width: 100%;
+  height: 100%;
   table-layout: fixed;
+  border-radius: 20px;
+  font-size: 1.3rem;
 }
 
 tbody {
   display: block;
-  height: 100%
+  height: 100%;
+  width: 100%;
 }
 
 tr {
@@ -18,13 +29,33 @@ tr {
 }
 
 th {
-  display: inline-block;
+  display: flex;
   width: 50%;
-  text-align: center;
+  height: 100%;
+  justify-content: center; 
+  align-items: center;     
+  z-index: 1;
+}
+
+.colHeader {
+  border-bottom: 3px white dashed;
+  font-size: 1.6rem;
 }
 
 td {
-  display: inline-block;
+  display: flex;
   width: 50%;
-  text-align: center;
+  height: 100%;  
+  justify-content: center; 
+  align-items: center;     
+  z-index: 1;
+  border-left: 2px white dashed;
+}
+
+.backgroundImg{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+  border-radius: 20px;
 }

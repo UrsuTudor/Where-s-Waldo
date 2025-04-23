@@ -1,5 +1,6 @@
 import React from "react";
 import { stopTime } from "../helpers";
+import '../assets/stylesheets/targettingBox.css'
 
 export default function TargetingBox({
   imageBounds,
@@ -71,16 +72,16 @@ export default function TargetingBox({
         top: position.y,
       }}
     >
-      <button type="submit" onClick={(e) => handleSelection(e, 1)} disabled={alreadyFound('Waldo') }>
+      <button className="red" type="submit" onClick={(e) => handleSelection(e, 1)} disabled={alreadyFound('Waldo') }>
         Waldo
       </button>
-      <button type="submit" onClick={(e) => handleSelection(e, 2)} disabled={alreadyFound('Wenda')}>
+      <button className="white" type="submit" onClick={(e) => handleSelection(e, 2)} disabled={alreadyFound('Wenda')}>
         Wenda
       </button>
-      <button type="submit" onClick={(e) => handleSelection(e, 3)} disabled={alreadyFound('Odlaw')}>
+      <button className="red" type="submit" onClick={(e) => handleSelection(e, 3)} disabled={alreadyFound('Odlaw')}>
         Odlaw
       </button>
-      <button type="submit" onClick={(e) => handleSelection(e, 4)} disabled={alreadyFound('Wizard')}>
+      <button className="white" type="submit" onClick={(e) => handleSelection(e, 4)} disabled={alreadyFound('Wizard')}>
         Wizard Whitebeard
       </button>
     </form>
