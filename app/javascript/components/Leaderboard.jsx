@@ -42,8 +42,8 @@ export default function Leaderboard(){
           {scores.map((score) => {
             return (
               <tr key={score.id}>
-                <th scope="row">{score.user}</th>
-                <td>{format_time(score.completion_time)}</td>
+                <th scope="row" className={score.id === 1 ? "firstRow" : console.log(score.id)} >{score.user}</th>
+                <td className={score.id === 1 ? "firstRow" : null} >{format_time(score.completion_time)}</td>
               </tr>
             )
           })}

@@ -16,7 +16,6 @@ export default function Home(){
   }
 
   return (
-    
       onHomePage ?
       <div className="homeContainer">
         <h1 className="title">Where is Waldo?</h1>

@@ -81,7 +81,7 @@ export default function TargetingBox({
       <button className="red" type="submit" onClick={(e) => handleSelection(e, 3)} disabled={alreadyFound('Odlaw')}>
         Odlaw
       </button>
-      <button className="white" type="submit" onClick={(e) => handleSelection(e, 4)} disabled={alreadyFound('Wizard')}>
+      <button className="blue" type="submit" onClick={(e) => handleSelection(e, 4)} disabled={alreadyFound('Wizard')}>
         Wizard Whitebeard
       </button>
     </form>

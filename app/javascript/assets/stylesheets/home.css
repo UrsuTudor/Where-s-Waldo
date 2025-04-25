@@ -41,7 +41,7 @@
 .btnContainer {
   display: flex;
   width: 100vw;
-  height: 5vh;
+  height: fit-content;
   justify-content: center;
 }
 
@@ -51,7 +51,7 @@
   border: rgb(88, 0, 0) 1px solid;
   border-radius: 10px;
   width: fit-content;
-  height: 4vh;
+  height: fit-content;
   font-size: 1.4rem;
   box-shadow: 5px 4px 7px rgb(88, 0, 0);
 }
