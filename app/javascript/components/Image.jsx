@@ -10,33 +10,20 @@ export default function Image({changeOnHomePage}) {
   const [boxDisplay, setBoxDisplay] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [foundCharacters, setFoundCharacters] = useState([]);
-  const boxPosition = useRef();
+  const clickCoords = useRef({})
   const imageBounds = useRef({});
 
   useEffect(() => {
     startTime();
   }, []);
 
-  // this method gets the bounds of the image element that will contain the targetting box and calculates the position of
-  // the box based on it, taking into account possible overflows to the right or bottom of the container
-  // the magic numbers are merely there for aesthethic reasons and can be edited without issues
-  function getBoxPosition(e) {
+  function getClickCoords(e) {
     imageBounds.current = e.target.getBoundingClientRect();
-
-    let offsetX = e.clientX - imageBounds.current.left + 15;
-    let offsetY = e.clientY - imageBounds.current.top + 50;
-
-    const isNearBottom = offsetY > imageBounds.current.height - 100;
-    const isNearRight = imageBounds.current.right - offsetX < 175;
-
-    if (isNearRight) offsetX -= 200;
-    if (isNearBottom) offsetY -= 125;
-
-    boxPosition.current = { x: offsetX, y: offsetY };
+    clickCoords.current = {x: e.clientX - imageBounds.current.left , y: e.clientY - imageBounds.current.top}
   }
 
   function handleClick(e) {
-    getBoxPosition(e);
+    getClickCoords(e);
     setBoxDisplay(!boxDisplay);
   }
 
@@ -54,10 +41,10 @@ export default function Image({changeOnHomePage}) {
         {boxDisplay && (
           <TargetingBox
             imageBounds={imageBounds.current}
-            position={boxPosition.current}
+            clickCoords={clickCoords.current}
             foundCharacters={foundCharacters}
             setFoundCharacters={setFoundCharacters}
-            onSubmit={() => {
+            setBoxDisplay={() => {
               setBoxDisplay(!boxDisplay);
             }}
           />

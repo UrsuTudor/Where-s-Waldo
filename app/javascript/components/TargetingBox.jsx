@@ -1,15 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { stopTime } from "../helpers";
 import '../assets/stylesheets/targettingBox.css'
 
 export default function TargetingBox({
   imageBounds,
-  position,
+  clickCoords,
   foundCharacters,
   setFoundCharacters,
-  onSubmit,
+  setBoxDisplay
 }) {
-  async function getCharacterCoords(e, id) {
+  // setting it to false until it is calculated for conditional rendering
+  const [boxPosition, setBoxPosition] = useState(false)
+
+  // calculates the position of the box based on the imageBounds, taking into account possible overflows to the right or 
+  // bottom of the container
+  // the magic numbers are only there for aesthethic reasons and can be edited without issues
+  useEffect(() => {
+    let offsetX = clickCoords.x + 15;
+    let offsetY = clickCoords.y + 50;
+
+    const isNearBottom = offsetY > imageBounds.height - 100;
+    const isNearRight = imageBounds.right - offsetX < 175;
+
+    if (isNearRight) offsetX -= 200;
+    if (isNearBottom) offsetY -= 125;
+
+    setBoxPosition({x: offsetX, y: offsetY})
+  }, [])
+
+  // sends the answer to the database and return the response
+  async function sendAnswer(id) {
     try {
       const csrfToken = document.querySelector("meta[name='csrf-token']").content;
       const res = await fetch(`/api/v1/coordinates/checkAnswer`, { 
@@ -21,7 +41,7 @@ export default function TargetingBox({
         body: JSON.stringify({
           id,
           imageBounds,
-          position
+          clickCoords
         })
       });
       if (!res.ok) throw new Error("Network response failed.");
@@ -33,18 +53,18 @@ export default function TargetingBox({
     }
   }
 
-  function checkSelection(coordData) {
-    if (coordData.is_valid_answer) {
+  function checkSelection(playerAnswer) {
+    if (playerAnswer.is_valid_answer) {
       setFoundCharacters((prevFoundCharacter) => [
         ...prevFoundCharacter,
-        coordData.character,
+        playerAnswer.character,
       ]);
     } else {
-      alert(`Look more closely, ${coordData.character.character} isn't there!`);
+      alert(`Look more closely, ${playerAnswer.character.character} isn't there!`);
       return
     }
 
-    if (coordData.game_won){
+    if (playerAnswer.game_won){
       stopTime()
       alert('Congratulations, you have found them all!')
     }
@@ -57,19 +77,20 @@ export default function TargetingBox({
   async function handleSelection(e, id) {
     e.preventDefault();
 
-    const coordData = await getCharacterCoords(e, id)
-    checkSelection(coordData);
+    const playerAnswer = await sendAnswer(id)
+    checkSelection(playerAnswer);
 
     // this merely hides the box after submit
-    onSubmit();
+    setBoxDisplay();
   }
 
   return (
+    boxPosition && 
     <form
       className="targettingBox"
       style={{
-        left: position.x,
-        top: position.y,
+        left: boxPosition.x,
+        top: boxPosition.y,
       }}
     >
       <button className="red" type="submit" onClick={(e) => handleSelection(e, 1)} disabled={alreadyFound('Waldo') }>

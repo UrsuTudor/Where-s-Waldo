@@ -9,13 +9,12 @@ class Api::V1::CoordinatesController < ApplicationController
     end
   end
 
-  #  todo: find a better way to normalize the criteria used when deciding whether or not the user has clicked on the right spot
   def checkAnswer
     imageBounds = params[:imageBounds]
-    position = params[:position]
+    clickCoords = params[:clickCoords]
 
     @character = getCharacter(params[:id])
-    is_valid_answer = @character.check_selection_proximity(imageBounds, position)
+    is_valid_answer = @character.check_selection_proximity(imageBounds, clickCoords)
 
     if is_valid_answer
       session[:found_characters] ||= []
@@ -33,7 +32,7 @@ class Api::V1::CoordinatesController < ApplicationController
   private
 
   def coordinate_params
-    params.require(:coordinate).permit(:id, :imageBounds, :position)
+    params.require(:coordinate).permit(:id, :imageBounds, :clickCoords)
   end
 
   def getCharacter(id)

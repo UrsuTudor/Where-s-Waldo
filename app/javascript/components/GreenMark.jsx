@@ -8,7 +8,7 @@ export default function GreenMark({x, y}) {
       style={{
         position: "absolute",
         left: x + 5,
-        top: y,
+        top: y + 40,
         width: '30px'
       }}
     />

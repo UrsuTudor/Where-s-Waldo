@@ -9,10 +9,10 @@
 #   end
 
 coordinates = [
-  { character: 'Waldo', x: 0.404, y: 0.665 },
-  { character: 'Wenda', x: 0.295, y: 0.560 },
-  { character: 'Odlaw', x: 0.071, y: 0.731 },
-  { character: 'Wizard', x: 0.78, y: 0.623 }
+  { character: 'Waldo', x: 0.404, y: 0.621 },
+  { character: 'Wenda', x: 0.293, y: 0.516 },
+  { character: 'Odlaw', x: 0.07, y: 0.692 },
+  { character: 'Wizard', x: 0.78, y: 0.574 }
 ]
 
 coordinates.each do |coord_data|

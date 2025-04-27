@@ -39,11 +39,11 @@ export default function Leaderboard(){
           </tr>
         </thead>
         <tbody>
-          {scores.map((score) => {
+          {scores.map((score, index) => {
             return (
               <tr key={score.id}>
-                <th scope="row" className={score.id === 1 ? "firstRow" : console.log(score.id)} >{score.user}</th>
-                <td className={score.id === 1 ? "firstRow" : null} >{format_time(score.completion_time)}</td>
+                <th scope="row" className={index === 0 ? "firstRow" : null } >{score.user}</th>
+                <td className={index === 0 ? "firstRow" : null} >{format_time(score.completion_time)}</td>
               </tr>
             )
           })}
