@@ -10,21 +10,13 @@ class Api::V1::CoordinatesController < ApplicationController
   end
 
   def checkAnswer
-    imageBounds = params[:imageBounds]
-    clickCoords = params[:clickCoords]
-
     @character = getCharacter(params[:id])
-    is_valid_answer = @character.check_selection_proximity(imageBounds, clickCoords)
 
-    if is_valid_answer
-      session[:found_characters] ||= []
-      session[:found_characters] << params[:id] unless session[:found_characters].include?(params[:id])
-    end
+    is_valid_answer = valid_answer?(@character, params[:imageBounds], params[:clickCoords])
+    update_session(params[:id]) if is_valid_answer
 
-    game_won = checkWin()
-    if game_won
-      session[:found_characters] = []
-    end
+    game_won = game_won?
+    session[:found_characters] = [] if game_won
 
     render json: { is_valid_answer: is_valid_answer, character: @character, game_won: game_won }
   end
@@ -32,18 +24,23 @@ class Api::V1::CoordinatesController < ApplicationController
   private
 
   def coordinate_params
-    params.require(:coordinate).permit(:id, :imageBounds, :clickCoords)
+    params.require(:coordinate).permit(:character, :x, :y)
   end
 
   def getCharacter(id)
     @coordinate = Coordinate.find(id)
   end
 
-  def checkWin
-    if session[:found_characters].length === 4
-      true
-    else
-      false
-    end
+  def valid_answer?(character, imageBounds, clickCoords)
+    character.check_selection_proximity(imageBounds, clickCoords)
+  end
+
+  def game_won?
+    session[:found_characters].length === 4
+  end
+
+  def update_session(id)
+    session[:found_characters] ||= []
+    session[:found_characters] << id unless session[:found_characters].include?(id)
   end
 end
