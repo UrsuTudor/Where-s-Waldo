@@ -29,11 +29,4 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_16_192622) do
     t.datetime "updated_at", null: false
     t.index ["user"], name: "index_leaderboard_posts_on_user"
   end
-
-  create_table "timers", force: :cascade do |t|
-    t.time "start"
-    t.time "end"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 end

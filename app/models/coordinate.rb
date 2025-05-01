@@ -4,8 +4,8 @@ class Coordinate < ApplicationRecord
   validates :y, presence: true
 
   def check_selection_proximity(image_bounds, clickCoords)
-    normalized_x_criteria = (image_bounds["width"] / 100.0) * 1.5
-    normalized_y_criteria = (image_bounds["height"] / 100.0) * 1.5
+    normalized_x_criteria = (image_bounds["width"] / 100.0) * 2
+    normalized_y_criteria = (image_bounds["height"] / 100.0) * 2
 
     close_on_right_bound = clickCoords["x"] - (self.x * image_bounds["width"]) < normalized_x_criteria
     close_on_left_bound  = (self.x * image_bounds["width"]) - clickCoords["x"] < normalized_x_criteria
