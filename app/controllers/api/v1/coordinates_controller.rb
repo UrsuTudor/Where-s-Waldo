@@ -15,7 +15,7 @@ class Api::V1::CoordinatesController < ApplicationController
     is_valid_answer = valid_answer?(@character, params[:imageBounds], params[:clickCoords])
     update_session(params[:id]) if is_valid_answer
 
-    game_won = game_won?
+    game_won = game_won? if session[:found_characters]
     session[:found_characters] = [] if game_won
 
     render json: { is_valid_answer: is_valid_answer, character: @character, game_won: game_won }

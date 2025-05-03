@@ -17,11 +17,10 @@ export default function Image({changeOnHomePage}) {
     startTime();
   }, []);
 
+  console.log(foundCharacters)
   function getClickCoords(e) {
     imageBounds.current = e.target.getBoundingClientRect();
     clickCoords.current = {x: e.clientX - imageBounds.current.left , y: e.clientY - imageBounds.current.top}
-    console.log(imageBounds.current)
-    console.log(clickCoords)
   }
 
   function handleClick(e) {

@@ -15,20 +15,21 @@ class Api::V1::LeaderboardPostsController < ApplicationController
     end
   end
 
+  private
+
+  def leaderboard_posts_params
+    params.require(:leaderboard_post).permit(:user)
+  end
+
   def calculate_time
     start_minutes, start_seconds = session[:start_time].split(":").map(&:to_i)
     end_minutes, end_seconds     = session[:end_time].split(":").map(&:to_i)
 
     completion_minutes = (end_minutes - start_minutes + 60) % 60
+    completion_minutes -= 1 if end_seconds < start_seconds
     completion_seconds = (end_seconds - start_seconds + 60) % 60
 
     # returning the time in seconds for easier sorting in the leaderboard
     completion_minutes * 60 + completion_seconds
-  end
-
-  private
-
-  def leaderboard_posts_params
-    params.require(:leaderboard_post).permit(:username, :user, :completion_time)
   end
 end

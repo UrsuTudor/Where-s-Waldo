@@ -12,6 +12,12 @@ Rails.application.routes.draw do
     end
   end
 
+  if Rails.env.test?
+    namespace :test do
+        post "session", to: "test_session#update_session"
+    end
+  end
+
   get "/*path" => "homepage#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
