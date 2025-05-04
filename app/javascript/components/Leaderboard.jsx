@@ -29,9 +29,9 @@ export default function Leaderboard(){
   }
 
   return (
-    <div className="table_container ">
+    <div className="table_container">
       <img className="backgroundImg" src="starry_sky.jpg" alt="" />
-      <table>
+      <table aria-label="leaderboard table">
         <thead>
           <tr>
             <th className='colHeader' scope="col">Name</th>

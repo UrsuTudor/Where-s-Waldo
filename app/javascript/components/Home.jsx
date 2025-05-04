@@ -21,7 +21,7 @@ export default function Home(){
         <h1 className="title">Where is Waldo?</h1>
         <h2 className="subtitle">Try to find Waldo, his friends and...his enemies(?) </h2>
         <div className="btnContainer">
-          <button className="startBtn" onClick={changeOnHomePage}>Start the search</button>
+          <button className="startBtn" aria-label="play button" onClick={changeOnHomePage}>Start the search</button>
         </div>
         <Leaderboard/>
       </div>

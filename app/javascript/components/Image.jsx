@@ -17,7 +17,6 @@ export default function Image({changeOnHomePage}) {
     startTime();
   }, []);
 
-  console.log(foundCharacters)
   function getClickCoords(e) {
     imageBounds.current = e.target.getBoundingClientRect();
     clickCoords.current = {x: e.clientX - imageBounds.current.left , y: e.clientY - imageBounds.current.top}
@@ -35,8 +34,8 @@ export default function Image({changeOnHomePage}) {
 
   return (
     <div>
-      <img className="backgroundImg" id="gameBackground" src="starry_sky.jpg" alt="" />
-      <div className="gameArea">
+      <img className="backgroundImg" id="gameBackground" src="starry_sky.jpg" alt="a background image of a starry sky" />
+      <div className="gameArea" aria-label="game area">
         <h1 className="timer">Elapsed Time: {elapsedTime}</h1>
         <img className={foundCharacters.length == 4 ? 'waldoImg dimmed' : 'waldoImg'}  src="waldo.jpg" alt="" onClick={handleClick} />
         {boxDisplay && (
