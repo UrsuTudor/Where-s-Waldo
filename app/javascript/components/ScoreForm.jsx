@@ -40,7 +40,7 @@ export default function ScoreForm({time, changeOnHomePage}) {
   }
 
   return (
-    <form className="leaderboardForm" onSubmit={(e) => postToLeaderboard(e)}>
+    <form className="leaderboardForm"  aria-label="form for submitting your score" onSubmit={(e) => postToLeaderboard(e)}>
       <img className="backgroundImg" src="starry_sky.jpg" alt="" />
       <label>
         <h1>Congratulations, you have found them all!</h1>
@@ -53,18 +53,19 @@ export default function ScoreForm({time, changeOnHomePage}) {
             onChange={(e) => setName(e.target.value)}
             onFocus={() => setNameIsFocused(!nameIsFocused)}
             onBlur={() => setNameIsFocused(!nameIsFocused)}
+            aria-label="Name for leaderboard"
           />
         </div>
-        {displaySubmitErrorMessage && <p className="validationMsg">{submitErrorMessage}</p>}
+        {displaySubmitErrorMessage && <p className="validationMsg" aria-label="message displayed due to a submission error">{submitErrorMessage}</p>}
         {nameIsFocused ? (
           <>
             {displaySubmitErrorMessage ? setDisplaySubmitErrorMessage(false) : null}
-            {name.length < 3 && <p className="validationMsg">Your name needs to have a length of at least 3 characters.</p>}
-            {name.length > 18 && <p className="validationMsg">Your name cannot have a length bigger than 18 characters.</p>}
+            {name.length < 3 && <p className="validationMsg" data-testid={"shortNameError"}>Your name needs to have a length of at least 3 characters.</p>}
+            {name.length > 18 && <p className="validationMsg" data-testid={"longNameError"}>Your name cannot have a length bigger than 18 characters.</p>}
           </>
         ) : null}
       </label>
-      <button className="boardSubmit" type="submit">Post score</button>
+      <button className="boardSubmit" type="submit" aria-label="submit button">Post score</button>
     </form>
   );
 }
