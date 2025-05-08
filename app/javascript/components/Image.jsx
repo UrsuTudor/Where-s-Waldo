@@ -10,6 +10,8 @@ export default function Image({changeOnHomePage}) {
   const [boxDisplay, setBoxDisplay] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [foundCharacters, setFoundCharacters] = useState([]);
+  const [displayMessage, setDisplayMessage] = useState(false)
+  const [message, setMessage] = useState("")
   const clickCoords = useRef({})
   const imageBounds = useRef({});
 
@@ -37,6 +39,7 @@ export default function Image({changeOnHomePage}) {
       <img className="backgroundImg" id="gameBackground" src="starry_sky.jpg" alt="a background image of a starry sky" />
       <div className="gameArea" aria-label="game area">
         <h1 className="timer">Elapsed Time: {elapsedTime}</h1>
+        {displayMessage && <h2>{message}</h2>}
         <img className={foundCharacters.length == 4 ? 'waldoImg dimmed' : 'waldoImg'}  src="waldo.jpg" alt="" onClick={handleClick} />
         {boxDisplay && (
           <TargetingBox
@@ -47,6 +50,8 @@ export default function Image({changeOnHomePage}) {
             setBoxDisplay={() => {
               setBoxDisplay(!boxDisplay);
             }}
+            setDisplayMessage={setDisplayMessage}
+            setMessage={setMessage}
           />
         )}
         {foundCharacters.map((character, i) => {

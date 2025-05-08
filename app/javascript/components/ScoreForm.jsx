@@ -40,6 +40,7 @@ export default function ScoreForm({time, changeOnHomePage}) {
     <form className="leaderboardForm" onSubmit={(e) => postToLeaderboard(e)}>
       <img className="backgroundImg" src="starry_sky.jpg" alt="" />
       <label>
+        <h1>Congratulations, you have found them all!</h1>
         <h1 className="finalTime"> Your time: {time} </h1>
         <div className="inputContainer">
           <span>Name:  </span> 

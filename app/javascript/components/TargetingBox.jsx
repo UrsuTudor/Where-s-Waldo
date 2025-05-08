@@ -7,7 +7,9 @@ export default function TargetingBox({
   clickCoords,
   foundCharacters,
   setFoundCharacters,
-  setBoxDisplay
+  setBoxDisplay,
+  setDisplayMessage,
+  setMessage
 }) {
   // setting it to false until it is calculated for conditional rendering
   const [boxPosition, setBoxPosition] = useState(false)
@@ -32,6 +34,7 @@ export default function TargetingBox({
   async function sendAnswer(id) {
     try {
       const csrfToken = document.querySelector("meta[name='csrf-token']").content;
+
       const res = await fetch(`/api/v1/coordinates/checkAnswer`, { 
         method: 'POST',
         headers: {
@@ -60,13 +63,13 @@ export default function TargetingBox({
         playerAnswer.character,
       ]);
     } else {
-      alert(`Look more closely, ${playerAnswer.character.character} isn't there!`);
+      setMessage(`Look more closely, ${playerAnswer.character.character} isn't there!`)
+      setDisplayMessage(true)
       return
     }
 
     if (playerAnswer.game_won){
       stopTime()
-      alert('Congratulations, you have found them all!')
     }
   }
 
@@ -93,7 +96,8 @@ export default function TargetingBox({
         top: boxPosition.y,
       }}
     >
-      <button className="red" type="submit" onClick={(e) => handleSelection(e, 1)} disabled={alreadyFound('Waldo') }>
+      <button aria-label="waldo button" className="red" type="submit" onClick={(e) =>  handleSelection(e, 1)} disabled={alreadyFound('Waldo')
+      }>
         Waldo
       </button>
       <button className="white" type="submit" onClick={(e) => handleSelection(e, 2)} disabled={alreadyFound('Wenda')}>
