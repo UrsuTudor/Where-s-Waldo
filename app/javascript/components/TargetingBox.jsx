@@ -62,6 +62,7 @@ export default function TargetingBox({
         ...prevFoundCharacter,
         playerAnswer.character,
       ]);
+      setDisplayMessage(false)
     } else {
       setMessage(`Look more closely, ${playerAnswer.character.character} isn't there!`)
       setDisplayMessage(true)

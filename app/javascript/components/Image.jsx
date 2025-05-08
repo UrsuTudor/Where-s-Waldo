@@ -39,8 +39,8 @@ export default function Image({changeOnHomePage}) {
       <img className="backgroundImg" id="gameBackground" src="starry_sky.jpg" alt="a background image of a starry sky" />
       <div className="gameArea" aria-label="game area">
         <h1 className="timer">Elapsed Time: {elapsedTime}</h1>
-        {displayMessage && <h2>{message}</h2>}
-        <img className={foundCharacters.length == 4 ? 'waldoImg dimmed' : 'waldoImg'}  src="waldo.jpg" alt="" onClick={handleClick} />
+        {displayMessage && <h2 data-testid="wrongGuessMessage" >{message}</h2>}
+        <img data-testid={"image"} className={foundCharacters.length == 4 ? 'waldoImg dimmed' : 'waldoImg'}  src="waldo.jpg" alt="" onClick={handleClick} />
         {boxDisplay && (
           <TargetingBox
             imageBounds={imageBounds.current}

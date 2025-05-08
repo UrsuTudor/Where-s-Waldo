@@ -12,7 +12,7 @@ beforeEach(() => {
   render(<Home />)
 })
 
-test("renders Leaderboard by default", async () => {
+test("renders Leaderboard on render", async () => {
   const leaderboardTable = screen.getByLabelText("leaderboard table");
   expect(leaderboardTable).toBeInTheDocument();
 });

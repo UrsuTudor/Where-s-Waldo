@@ -1,9 +1,8 @@
 import "@testing-library/jest-dom";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import ScoreForm from "../components/ScoreForm";
 import userEvent from "@testing-library/user-event";
 import { act } from "react";
-import { wait } from "@testing-library/user-event/dist/cjs/utils/index.js";
 
 beforeEach(() => {
   render(<ScoreForm changeOnHomePage={jest.fn()}/>)
