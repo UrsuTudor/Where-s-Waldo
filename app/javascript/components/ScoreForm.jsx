@@ -4,12 +4,15 @@ import { useState } from "react";
 export default function ScoreForm({time, changeOnHomePage}) {
   const [name, setName] = useState('')
   const [nameIsFocused, setNameIsFocused] = useState(false)
+  const [submitErrorMessage, setSubmitErrorMessage] = useState("")
+  const [displaySubmitErrorMessage, setDisplaySubmitErrorMessage] = useState(false)
 
   async function postToLeaderboard(e){
     e.preventDefault()
 
     if(name.length < 3 || name.length > 18) {
-      alert('Your name does not meet the specified requirements.')
+      setSubmitErrorMessage('Your name does not meet the specified requirements.')
+      setDisplaySubmitErrorMessage(true)
       return
     }
 
@@ -52,9 +55,10 @@ export default function ScoreForm({time, changeOnHomePage}) {
             onBlur={() => setNameIsFocused(!nameIsFocused)}
           />
         </div>
-        
+        {displaySubmitErrorMessage && <p className="validationMsg">{submitErrorMessage}</p>}
         {nameIsFocused ? (
           <>
+            {displaySubmitErrorMessage ? setDisplaySubmitErrorMessage(false) : null}
             {name.length < 3 && <p className="validationMsg">Your name needs to have a length of at least 3 characters.</p>}
             {name.length > 18 && <p className="validationMsg">Your name cannot have a length bigger than 18 characters.</p>}
           </>
