@@ -41,6 +41,10 @@ a:visited {
   color: white;
 }
 
+.errorMsg {
+  text-align: center;
+}
+
 /* leaderboard form styling */
 .leaderboardForm {
   position: absolute;
@@ -108,6 +112,21 @@ label {
   padding: 0px 2vw 0px 2vw;
 }
 
+.formMsg {
+  text-align: center;
+  border-bottom: 2px white dashed;
+  padding-bottom: 2vw;
+  font-size: 1.8rem;
+  z-index: 1;
+  width: 100%;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media (max-width: 1200px) {
   .leaderboardForm {
     height: 60%;
@@ -115,3 +134,14 @@ label {
     min-height: fit-content;
   }
 }
+
+@media (max-width: 600px) {
+  .leaderboardForm {
+    height: 75%;
+  }
+
+  .finalTime {
+    font-size: 1.5rem;
+  }
+}
+

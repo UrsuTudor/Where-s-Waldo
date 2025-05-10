@@ -41,9 +41,9 @@ export default function ScoreForm({time, changeOnHomePage}) {
 
   return (
     <form className="leaderboardForm"  aria-label="form for submitting your score" onSubmit={(e) => postToLeaderboard(e)}>
-      <img className="backgroundImg" src="starry_sky.jpg" alt="" />
+      <img className="backgroundImg" src="starry_sky.jpg" alt="a background image of a starry night sky" />
+      <h1 className="formMsg">Congratulations, you've found them all!</h1>
       <label>
-        <h1>Congratulations, you have found them all!</h1>
         <h1 className="finalTime"> Your time: {time} </h1>
         <div className="inputContainer">
           <span>Name:  </span> 

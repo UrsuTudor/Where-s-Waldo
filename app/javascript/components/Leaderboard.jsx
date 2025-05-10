@@ -30,7 +30,7 @@ export default function Leaderboard(){
 
   return (
     <div className="table_container">
-      <img className="backgroundImg" src="starry_sky.jpg" alt="" />
+      <img className="backgroundImg" src="starry_sky.jpg" alt="a background image of a starry night sky" />
       <table aria-label="leaderboard table">
         <thead>
           <tr>

@@ -39,8 +39,14 @@ export default function Image({changeOnHomePage}) {
       <img className="backgroundImg" id="gameBackground" src="starry_sky.jpg" alt="a background image of a starry sky" />
       <div className="gameArea" aria-label="game area">
         <h1 className="timer">Elapsed Time: {elapsedTime}</h1>
-        {displayMessage && <h2 data-testid="wrongGuessMessage" >{message}</h2>}
-        <img data-testid={"image"} className={foundCharacters.length == 4 ? 'waldoImg dimmed' : 'waldoImg'}  src="waldo.jpg" alt="" onClick={handleClick} />
+        {displayMessage && <h2 className="errorMsg" data-testid="wrongGuessMessage" >{message}</h2>}
+        <img 
+          data-testid={"image"} 
+          className={foundCharacters.length == 4 ? 'waldoImg dimmed' : 'waldoImg'}  
+          src="waldo.jpg" 
+          alt="A where is waldo style image that covers the game area" 
+          onClick={handleClick} 
+        />
         {boxDisplay && (
           <TargetingBox
             imageBounds={imageBounds.current}
@@ -67,10 +73,12 @@ export default function Image({changeOnHomePage}) {
         {foundCharacters.length === 4
         && <ScoreForm time={elapsedTime} changeOnHomePage={changeOnHomePage}/>}
         <div className="linkContainer">
-          <a href="https://www.flaticon.com/free-icons/yes" title="yes icons">
+          <a href="https://www.flaticon.com/free-icons/yes">
             Tick icon created by juicy_fish - Flaticon
           </a>
-          <a href="https://www.freepik.com/free-photo/abstract-geometric-background-shapes-texture_20386203.htm#fromView=keyword&page=1&position=15&uuid=d73dfde6-4e2a-4653-b91e-fa429bf313cb&query=Black+Starry+Sky">Starry background by kues1 on Freepik</a>
+          <a href="https://www.freepik.com/free-photo/abstract-geometric-background-shapes-texture_20386203.htm#fromView=keyword&page=1&position=15&uuid=d73dfde6-4e2a-4653-b91e-fa429bf313cb&query=Black+Starry+Sky">
+            Starry background by kues1 on Freepik
+          </a>
           <a href="https://images7.alphacoders.com/925/thumb-1920-925903.jpg">Where's Waldo image from alphacoders</a>
         </div>
       </div>

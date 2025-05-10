@@ -97,7 +97,7 @@ export default function TargetingBox({
         top: boxPosition.y,
       }}
     >
-      <button aria-label="waldo button" className="red" type="submit" onClick={(e) =>  handleSelection(e, 1)} disabled={alreadyFound('Waldo')
+      <button data-testid="waldo button" className="red" type="submit" onClick={(e) =>  handleSelection(e, 1)} disabled={alreadyFound('Waldo')
       }>
         Waldo
       </button>
