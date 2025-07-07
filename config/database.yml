@@ -79,7 +79,7 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: where_is_waldo_production
+  adapter: sqlite3
+  database: db/production.sqlite3
   username: where_is_waldo
   password: <%= ENV["WHERE_IS_WALDO_DATABASE_PASSWORD"] %>

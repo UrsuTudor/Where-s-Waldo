@@ -27,9 +27,20 @@
     "react-router-dom": "^7.4.1"
   },
   "jest": {
-    "moduleNameMapper": {
-      "\\.(css|less|scss|sass)$": "jest-transform-stub"
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
     },
-    "testEnvironment": "jsdom"
-  }
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    "testEnvironment": "jsdom",
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "packageManager": "yarn@1.22.22"
 }
